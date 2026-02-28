@@ -1,0 +1,968 @@
+/* --- 1. CORE BRAND DNA & RESET --- */
+:root {
+    --maroon: #921A40;
+    --light-pink: #F7A8C4;
+    --bg-pink: #fffafa;
+    --soft-blush: #FFF5F7;
+    --white: #ffffff;
+    --dark-text: #2d2d2d;
+    /* Fluid Typography Scale */
+    --h1-size: clamp(2.5rem, 6vw, 4.5rem);
+    --h2-size: clamp(2rem, 4vw, 3rem);
+    --h3-size: clamp(1.1rem, 2vw, 1.5rem);
+    --body-size: clamp(0.95rem, 1vw, 1.1rem);
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+html { 
+    scroll-behavior: smooth; 
+}
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+    font-size: var(--body-size);
+    color: var(--dark-text); 
+    background-color: var(--white);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, .lux-number, .lux-tagline, .section-title { 
+    color: var(--maroon); 
+}
+
+/* --- 2. NAVIGATION (Consolidated Logic) --- */
+nav {
+    position: fixed; 
+    top: 0;
+    width: 100%; 
+    padding: 20px 50px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95); 
+    z-index: 1000; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-bottom: 2px solid var(--light-pink);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+nav.nav-hidden { 
+    opacity: 0; 
+    transform: translateY(-100%); 
+    pointer-events: none; 
+}
+
+nav:hover {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+}
+
+.logo-container { 
+    display: flex; 
+    align-items: center; 
+    text-decoration: none; 
+}
+
+.nav-logo { 
+    height: clamp(40px, 5vh, 60px); 
+    width: auto; 
+    border-radius: 100%;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    mix-blend-mode: multiply; 
+    object-fit: contain;
+}
+
+.nav-logo:hover { 
+    transform: scale(1.05); 
+    filter: brightness(1.1);
+}
+
+.nav-links { 
+    display: flex; 
+    list-style: none; 
+}
+
+.nav-links li { 
+    margin-left: 30px; 
+}
+
+.nav-links a { 
+    text-decoration: none; 
+    color: var(--maroon); 
+    font-weight: 600; 
+    transition: 0.3s; 
+}
+
+.nav-links a:hover { 
+    color: var(--light-pink); 
+}
+
+/* --- 3. GLOBAL SECTION LAYOUT --- */
+section {
+    min-height: 90vh; 
+    width: 100%;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    padding: 80px 5%; 
+    position: relative;
+}
+
+.container { 
+    width: 90%; 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+/* Section specific backgrounds */
+.benefits-luxury, .why-us, .contact { background-color: var(--bg-pink); }
+.about-section, #price { background-color: var(--soft-blush); border-top: 1px solid var(--light-pink); }
+.faq-section { background-color: var(--white); }
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 50px;
+    align-items: center; /* Vertically centers text with the image */
+    margin-top: 40px;
+}
+
+@media (max-width: 850px) {
+    .about-grid {
+        grid-template-columns: 1fr; /* Stacks them back on mobile for readability */
+        text-align: center;
+    }
+}
+
+/* --- 4. TYPOGRAPHY HIERARCHY --- */
+.hero-title { 
+    font-family: 'Playfair Display', serif; 
+    font-size: var(--h1-size); 
+    line-height: 1.1; 
+    margin-bottom: 5px;
+}
+
+.hero-subtitle { 
+    font-family: 'Playfair Display', serif; 
+    font-style: italic; 
+    font-size: 2rem; 
+    color: #8b5e5e; 
+    margin-bottom: 40px;
+    text-align: center; 
+}
+
+/* Add this to your Hero button specifically */
+.hero-btn .btn-pill {
+    animation: professionalPulse 3s infinite;
+}
+
+@keyframes professionalPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(146, 26, 64, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(146, 26, 64, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(146, 26, 64, 0);
+    }
+}
+
+.hero-btn {
+    text-align: center;
+    
+}
+
+.jumping-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  /* Apply animation: name, duration, timing, repetition */
+  animation: jump 0.5s infinite alternate;
+}
+
+@keyframes jump {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-15px); /* Moves the button up */
+  }
+}
+
+.section-title { 
+    text-align: center; 
+    font-size: 2.5rem; 
+    margin-bottom: 25px; 
+}
+
+.sub-title { 
+    display: block; 
+    text-align: center; 
+    text-transform: uppercase; 
+    letter-spacing: 0.25em; 
+    font-size: 0.8rem; 
+    font-weight: 600; 
+    margin-bottom: 12px; 
+}
+
+.section-title-alt { 
+    font-family: 'Playfair Display', serif; 
+    font-size: var(--h2-size); 
+    text-align: center; 
+    max-width: 800px; 
+    margin: 0 auto 15px; 
+    line-height: 1.2; 
+}
+
+.content-heading, h3 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 1.6rem; 
+    margin-bottom: 15px; 
+}
+
+p, li, .lux-inner { 
+    color: #4a4a4a; 
+}
+
+/* --- 5. LUXURY ACCORDIONS --- */
+.luxury-accordion { 
+    width: 100%; 
+    max-width: 900px; 
+    margin: 0 auto; 
+}
+
+.lux-item { 
+    border-bottom: 1px solid rgba(128, 0, 0, 0.15); 
+    transition: all 0.4s ease; 
+}
+
+.lux-header { 
+    display: flex; 
+    align-items: center; 
+    padding: 30px 0; 
+    cursor: pointer; 
+}
+
+.lux-number { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 1.2rem; 
+    margin-right: 40px; 
+    opacity: 0.6; 
+}
+
+.lux-header h3 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 1.4rem; 
+    flex-grow: 1; 
+    transition: color 0.3s; 
+    color: var(--dark-text);
+}
+
+.lux-item.active .lux-header h3 { color: var(--maroon); }
+
+.lux-icon { 
+    width: 20px; 
+    height: 1px; 
+    background: var(--maroon); 
+    position: relative; 
+    transition: transform 0.4s; 
+}
+
+.lux-icon::after { 
+    content: ''; 
+    position: absolute; 
+    width: 1px; 
+    height: 20px; 
+    background: var(--maroon); 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+}
+
+.lux-item.active .lux-icon { transform: rotate(45deg); }
+
+.lux-content { 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+.lux-inner { padding: 0 0 40px 60px; }
+
+.lux-list { 
+    list-style: none; 
+    columns: 2; 
+    column-gap: 40px; 
+}
+
+.lux-list li { 
+    position: relative; 
+    padding-left: 20px; 
+    margin-bottom: 15px; 
+}
+
+.lux-list li::before { 
+    content: '→'; 
+    position: absolute; 
+    left: 0; 
+    color: var(--maroon); 
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 40px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.member {
+    text-align: center;
+    background: var(--white);
+    transition: transform 0.4s ease;
+}
+
+.member-image-wrap {
+    width: 100%;
+    aspect-ratio: 4 / 5; 
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid var(--light-pink);
+    border-radius: 8px;
+}
+
+.member img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: 0.6s ease;
+}
+
+.member:hover { transform: translateY(-5px); }
+.member:hover img { filter: grayscale(0%); transform: scale(1.05); }
+
+.studio-frame { 
+    width: 100%; 
+    aspect-ratio: 16 / 9; 
+    border: 1px solid var(--light-pink); 
+    padding: 15px; 
+    background: var(--white); 
+}
+
+.studio-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- 7. PRICING SLIDER & UI --- */
+.slider-container { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative; 
+    width: 100%; 
+    max-width: 1100px; 
+    padding: 0 50px; 
+}
+
+.col-head { 
+    background-color: var(--light-pink); 
+    color: var(--maroon); 
+    padding: 25px; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+}
+
+.col-body { 
+    background-color: var(--maroon); 
+    color: white; 
+    padding: 30px; 
+    font-weight: bold; 
+}
+
+.col-head span, .col-body span { font-size: 0.8rem; font-weight: normal; display: block; }
+
+.nav-arrow { 
+    background: none; 
+    border: none; 
+    color: var(--maroon); 
+    font-size: 5rem; 
+    font-weight: 100; 
+    cursor: pointer; 
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    transition: 0.3s; 
+    opacity: 0.4; 
+    z-index: 10;
+}
+
+.nav-arrow:hover { opacity: 1; transform: translateY(-50%) scale(1.1); }
+.left { left: 20px; }
+.right { right: 20px; }
+
+.btn-pill { 
+    padding: 12px 35px; 
+    background-color: #a68080; 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 50px; 
+    font-weight: 500; 
+    transition: 0.3s; 
+}
+
+.btn-pill:hover { 
+    background-color: var(--maroon); 
+    transform: translateY(-3px); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+/* --- CONTACT GRID ADJUSTMENTS --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Gives the Copy cards more space */
+    gap: 40px;
+    width: 100%;
+    align-items: start;
+}
+
+
+/* Container for the side-by-side view */
+.package-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for desktop */
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Individual Card Styling */
+.package-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(146, 26, 64, 0.08);
+    transition: transform 0.3s ease;
+    border: 1px solid var(--light-pink);
+}
+
+.package-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--maroon);
+}
+
+/* Card Header (The Pink Section) */
+.card-header {
+    background-color: var(--light-pink);
+    padding: 25px;
+    text-align: center;
+}
+
+.card-header h4 {
+    color: var(--maroon);
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.card-header p {
+    font-size: 0.85rem;
+    color: var(--maroon);
+    opacity: 0.8;
+}
+
+/* Card Body (The Maroon Section) */
+.card-body {
+    padding: 20px;
+}
+
+.price-item {
+    background-color: var(--maroon);
+    color: white;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.price-item .price {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.price-item .details {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+@media (max-width: 850px) {
+    /* 1. Force Side-by-Side Grid */
+    .package-comparison-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* Forces 2 columns regardless of screen size */
+        gap: 8px !important; /* Tighten the gap for mobile */
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    /* 2. Shrink Card Padding */
+    .package-card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        padding: 12px 5px; /* Thinner header for mobile */
+    }
+
+    .card-body {
+        padding: 10px; /* Less space inside the maroon area */
+    }
+
+    /* 3. Adjust Font Sizes for Clarity */
+    .card-header h4 {
+        font-size: 0.85rem; /* Small but readable title */
+        letter-spacing: 0;
+    }
+
+    .card-header p {
+        font-size: 0.65rem; /* Smaller subtext */
+    }
+
+    .price-item {
+        padding: 10px 5px;
+        margin-bottom: 8px;
+    }
+
+    .price-item .price {
+        font-size: 1.1rem; /* Adjusts price text to fit */
+    }
+
+    .price-item .details {
+        font-size: 0.65rem; /* Adjusts details text to fit */
+    }
+
+    /* 4. Ensure Container doesn't cut off arrows */
+    .slider-container {
+        padding: 0 35px; /* Space for the arrows */
+    }
+
+    .nav-arrow {
+        font-size: 2.5rem;
+    }
+}
+/* --- CONTACT CARD FIX --- */
+.contact-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--white);
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid var(--light-pink);
+    border-radius: 12px;
+    position: relative;
+    cursor: copy;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* THE FIX: Allow items to move to a new line if they don't fit */
+    flex-wrap: wrap; 
+    gap: 15px; 
+}
+
+/* Ensure the text doesn't get squashed against the icon */
+.contact-card span, .contact-card strong {
+    flex: 1;
+    min-width: 180px; /* Forces wrap if space is less than 180px */
+    word-break: break-word; /* Prevents long emails from breaking the box */
+}
+
+/* Make the "Tap to Copy" badge look better when stacked */
+.copy-badge {
+    position: relative !important; /* Changed from absolute to prevent overlap */
+    right: 0 !important;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--maroon);
+    border: 1px solid var(--maroon);
+    padding: 6px 15px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+@media (max-width: 500px) {
+    .contact-card {
+        justify-content: center;
+        text-align: center;
+        flex-direction: column; /* Fully stack icon, text, and button */
+    }
+    
+    .contact-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* Hover State: Background and Border change */
+.contact-card:hover {
+    background-color: var(--soft-blush);
+    border-color: var(--maroon);
+    transform: translateX(8px);
+}
+
+.contact-icon {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    background: var(--soft-blush);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+}
+
+.contact-card:hover .contact-icon {
+    background: var(--white); /* Icon background flips on hover */
+}
+
+/* --- COPY BADGE FIX --- */
+.copy-badge {
+    position: absolute;
+    right: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--maroon);
+    border: 1px solid var(--maroon);
+    padding: 4px 12px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover .copy-badge {
+    background: var(--maroon);
+    color: var(--white);
+}
+
+/* --- QR SIZE REDUCTION --- */
+.whatsapp-scan-wrap {
+    padding: 30px;
+    border: 1px solid var(--light-pink);
+    border-radius: 15px;
+    background: var(--white);
+    max-width: 320px; /* Prevents it from being too big */
+    margin: 0 auto;
+}
+
+.qr-code-box {
+    width: 140px; /* Reduced size */
+    height: 140px;
+    margin: 15px auto;
+    padding: 10px;
+    background: var(--white);
+    border: 2px dashed var(--light-pink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Darkened background when menu is open */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px); /* Modern blur effect */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 1400;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- 8. ANIMATIONS & RESPONSIVE --- */
+@keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 992px) {
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 850px) {
+    /* 1. FORCE ARROWS TO SHOW */
+    .nav-arrow { 
+        display: block !important; /* Overrides any previous 'none' rule */
+        font-size: 3.5rem !important; 
+        opacity: 0.8 !important;
+        z-index: 1000;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Position them at the very edges so they don't cover the cards */
+    .left { left: 5px !important; }
+    .right { right: 5px !important; }
+
+    /* 2. FORCE SIDE-BY-SIDE GRID */
+    .package-comparison-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; 
+        gap: 8px !important;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    /* 3. ADJUST SPACING */
+    .slider-container {
+        padding: 0 45px !important; /* Adds room so cards don't hit the arrows */
+    }
+
+    .package-card {
+        border-radius: 10px;
+    }
+
+    /* Shrink text to fit 2 columns on small screens */
+    .price-item .price { font-size: 1.1rem; }
+    .price-item .details { font-size: 0.6rem; }
+    .card-header h4 { font-size: 0.8rem; }
+}
+
+/* --- 1. DEFAULT STATE (Desktop/Computer) --- */
+.mobile-nav-toggle {
+    display: none !important; /* Forces it to stay hidden on computers */
+    cursor: pointer;
+    z-index: 2000;
+    width: 50px; 
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(146, 26, 64, 0.05); 
+    border-radius: 50%;
+}
+
+/* --- 2. MOBILE STATE (Screens smaller than 850px) --- */
+@media (max-width: 850px) {
+    .mobile-nav-toggle {
+        display: flex !important; /* Only shows on mobile screens */
+    }
+
+    .nav-links {
+        position: fixed;
+        right: -100%; 
+        top: 0;
+        height: 100vh;
+        width: 75%;
+        background-color: var(--white);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.5s ease-in-out;
+        z-index: 1500;
+    }
+
+    .nav-links.nav-active {
+        right: 0 !important; /* Slides menu in when active */
+    }
+}
+
+.mobile-nav-toggle:active {
+    background: rgba(146, 26, 64, 0.15); /* Feedback when pressed */
+}
+
+/* Make the actual lines slightly thicker and wider */
+.hamburger {
+    width: 30px; /* Increased from 25px */
+    height: 3px; /* Increased from 2px */
+    background-color: var(--maroon);
+    display: block;
+    position: relative;
+}
+
+.hamburger::before, .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background-color: var(--maroon);
+    transition: all 0.3s ease;
+}
+
+/* Spread the lines out a bit more for a cleaner look */
+.hamburger::before { transform: translateY(-10px); }
+.hamburger::after { transform: translateY(10px); }
+
+/* --- THE "X" (CROSS) FIX --- */
+.mobile-nav-toggle.active .hamburger {
+    background-color: transparent;
+}
+
+/* Ensure the X is also thick and easy to see */
+.mobile-nav-toggle.active .hamburger::before {
+    transform: rotate(45deg) translateY(0);
+}
+
+.mobile-nav-toggle.active .hamburger::after {
+    transform: rotate(-45deg) translateY(0);
+}
+
+.hamburger {
+    width: 25px;
+    height: 2px;
+    background-color: var(--maroon);
+    display: block;
+    position: relative;
+}
+
+.hamburger::before, .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 2px;
+    background-color: var(--maroon);
+    transition: all 0.3s ease;
+}
+
+.hamburger::before { transform: translateY(-8px); }
+.hamburger::after { transform: translateY(8px); }
+
+/* --- MENU SLIDE-IN FIX --- */
+@media (max-width: 850px) {
+    .mobile-nav-toggle { display: flex; } /* Show on mobile */
+
+    .nav-links {
+        position: fixed;
+        right: -100%; /* Start off-screen */
+        top: 0;
+        height: 100vh;
+        width: 75%;
+        background-color: var(--white);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.5s ease-in-out;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        z-index: 1500;
+    }
+
+    /* Force the menu to show when this class is added */
+    .nav-links.nav-active {
+        right: 0 !important;
+    }
+
+    .nav-links li {
+        margin: 25px 0;
+    }
+
+    /* Animation to 'X' */
+    .mobile-nav-toggle.active .hamburger { background-color: transparent; }
+    .mobile-nav-toggle.active .hamburger::before { transform: rotate(45deg) translateY(0); }
+    .mobile-nav-toggle.active .hamburger::after { transform: rotate(-45deg) translateY(0); }
+}
+
+@media (max-width: 850px) {
+    /* --- 1. Fix "Cramped" Start Your Journey Section --- */
+    .contact-grid {
+        display: flex !important;
+        flex-direction: column !important; /* Stacks items vertically */
+        gap: 30px !important;
+        width: 100%;
+    }
+
+    .contact-info, .whatsapp-scan-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Ensure the section grows to fit the content */
+    section#contact {
+        height: auto !important;
+        min-height: 100vh;
+        padding: 60px 20px;
+    }
+
+    /* --- 2. Fix Disappearing Instructors --- */
+    #team {
+        height: auto !important;
+        display: flex !important; /* Ensures the section stays visible */
+    }
+
+    .team-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important; /* Shows one instructor at a time on small screens */
+        gap: 20px;
+        width: 100%;
+    }
+
+    .member {
+        display: block !important; /* Prevents instructors from being hidden */
+        margin-bottom: 20px;
+    }
+
+    /* --- 3. Fix Navigation Toggle Size --- */
+    .mobile-nav-toggle {
+        display: flex !important;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* --- SLIDING ANIMATION LOGIC --- */
+.package-view {
+    display: none !important;
+    opacity: 0;
+    width: 100%;
+}
+
+/* When active, trigger the slide animation */
+.package-view.active {
+    display: block !important;
+    opacity: 1;
+    animation: slideFadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes slideFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px); /* Starts slightly to the right */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);    /* Slides into perfect center */
+    }
+}
+
+/* Optional: Add a slight bounce to the arrows when clicked */
+.nav-arrow:active {
+    transform: translateY(-50%) scale(0.9);
+}
+/* Ensure sections expand to fit content */
+section {
+    min-height: 90vh;
+    height: auto;
+    padding: 80px 5%;
+}

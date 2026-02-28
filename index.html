@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeU Dance Academy | Move with Passion</title>
+    <link rel="icon" href="./beu logo.jpg" type="image/png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./Beu.css">
+</head>
+<body id="top">
+
+    <nav id="navbar">
+        <a href="#top" class="logo-container">
+            <img src="./beu logo.jpg" alt="BeU Dance Academy Logo" class="nav-logo">
+        </a>
+
+        <div class="mobile-nav-toggle" id="mobile-menu-btn">
+            <span class="hamburger"></span>
+        </div>
+        
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#why">Benefits</a></li>
+            <li><a href="#price">Packages</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="hero-title">Welcome to BeU!</h1>
+            <p class="hero-subtitle">Your Stage, Yoursteps, Yourself</p>
+            <div class="hero-btn">
+                <a href="#contact" class="btn-pill">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title-alt">Our Vision</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3 class="content-heading">Experience the Journey</h3>
+                    <p>At BeU Dance Academy, we provide a structured yet nurturing environment. When students walk through our doors, they don't just learn steps—they discover their own rhythm.</p>
+                </div>
+                <div class="about-visual">
+                    <div class="studio-frame">
+                        <img src="./studio-photo.jpg" alt="BeU Studio">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title-alt">Meet the Instructors</h2>
+            <div id="instructor-grid" class="team-grid">
+                </div>
+        </div>
+    </section>
+
+    <section id="why" class="benefits-luxury">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title-alt">The BeU Experience</h2>
+            
+            <div class="luxury-accordion">
+                <div class="lux-item">
+                    <div class="lux-header" onclick="toggleLux(this)">
+                        <span class="lux-number">01</span>
+                        <h3>Adult Classes <small>(Beginner-Friendly)</small></h3>
+                        <div class="lux-icon"></div>
+                    </div>
+                    <div class="lux-content">
+                        <div class="lux-inner">
+                            <p class="lux-tagline">Dance is meant to be fun — not intimidating.</p>
+                            <ul class="lux-list">
+                                <li>No dance background required</li>
+                                <li>No stress, no harsh pushing</li>
+                                <li>Learn at a comfortable and supportive pace</li>
+                                <li>Focus on enjoyment, confidence, and steady improvement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lux-item">
+                    <div class="lux-header" onclick="toggleLux(this)">
+                        <span class="lux-number">02</span>
+                        <h3>Junior Classes <small>(Ages 7+)</small></h3>
+                        <div class="lux-icon"></div>
+                    </div>
+                    <div class="lux-content">
+                        <div class="lux-inner">
+                            <p class="lux-tagline">We believe strong basics lead to lasting growth.</p>
+                            <ul class="lux-list">
+                                <li>Strong emphasis on foundation training & basic techniques</li>
+                                <li>Focus on body control, musicality, and coordination</li>
+                                <li><strong>Specialized Training:</strong> Competition and performance coaching</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="price" class="pricing-slider-section">
+    <div class="container" data-aos="fade-up">
+        <span class="sub-title">Invest in Yourself</span>
+        <h2 class="section-title-alt">Academy Packages</h2>
+        
+        <div class="slider-container">
+            <button class="nav-arrow left" onclick="changePackage(-1)">&#8249;</button>
+
+            <div id="senior-view" class="package-view active">
+                <div class="price-header-info">
+                    <h3 class="package-category-title">Adult Packages</h3>
+                    <div class="quick-pricing">
+                        <span><strong>Trial:</strong> RM25</span>
+                        <span><strong>Single Class:</strong> RM50</span>
+                    </div>
+                </div>
+
+                <div class="package-comparison-grid">
+                    <div class="package-card class-card">
+                        <div class="card-header">
+                            <h4>Class Packages</h4>
+                            <p>(Fixed to ONE dance style)</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="price-item">
+                                <span class="price">RM 150</span>
+                                <span class="details">4 Classes / 1 Month</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price">RM 260</span>
+                                <span class="details">8 Classes / 2 Months</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="package-card credit-card">
+                        <div class="card-header">
+                            <h4>Credit Packages</h4>
+                            <p>(Flexible - ANY dance style)</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="price-item">
+                                <span class="price">RM 160</span>
+                                <span class="details">4 Credits / 6 Weeks</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price">RM 300</span>
+                                <span class="details">8 Credits / 10 Weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="junior-view" class="package-view">
+    <div class="price-header-info">
+        <h3 class="package-category-title">Junior Packages</h3>
+        <div class="quick-pricing">
+            <span><strong>Trial:</strong> RM25</span>
+            <span><strong>Single Class:</strong> RM50</span>
+        </div>
+    </div>
+
+    <div class="package-comparison-grid">
+        <div class="package-card">
+            <div class="card-header">
+                <h4>Class Packages</h4>
+                <p>(ONE dance style)</p>
+            </div>
+            <div class="card-body">
+                <div class="price-item">
+                    <span class="price">RM 120</span>
+                    <span class="details">4 Classes / 1 Month</span>
+                </div>
+                <div class="price-item">
+                    <span class="price">RM 200</span>
+                    <span class="details">8 Classes / 2 Months</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="package-card">
+            <div class="card-header">
+                <h4>Credit Packages</h4>
+                <p>(ANY dance style)</p>
+            </div>
+            <div class="card-body">
+                <div class="price-item">
+                    <span class="price">RM 140</span>
+                    <span class="details">4 Credits / 6 Weeks</span>
+                </div>
+                <div class="price-item">
+                    <span class="price">RM 240</span>
+                    <span class="details">8 Credits / 10 Weeks</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <button class="nav-arrow right" onclick="changePackage(1)">&#8250;</button>
+        </div>
+        <p class="footer-note">*ALL PACKAGES ACCEPT ONE TIME PAYMENT ONLY</p>
+    </div>
+</section>
+
+    <section id="faq" class="faq-section">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="luxury-accordion">
+                <div class="lux-item">
+                    <div class="lux-header" onclick="toggleLux(this)">
+                        <span class="lux-number">Q1</span>
+                        <h3>What age groups do you accept?</h3>
+                        <div class="lux-icon"></div>
+                    </div>
+                    <div class="lux-content">
+                        <div class="lux-inner">
+                            <p>We welcome students from <strong>3 years old to adults</strong>. We have specific programs tailored for Preschoolers, Juniors, and Adults.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lux-item">
+                    <div class="lux-header" onclick="toggleLux(this)">
+                        <span class="lux-number">Q2</span>
+                        <h3>Do I need dance experience to join?</h3>
+                        <div class="lux-icon"></div>
+                    </div>
+                    <div class="lux-content">
+                        <div class="lux-inner">
+                            <p>No experience needed! We cater to all levels including <strong>beginners, intermediate, and advanced</strong> dancers. Our Adult classes are specifically designed to be stress-free and beginner-friendly.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lux-item">
+                    <div class="lux-header" onclick="toggleLux(this)">
+                        <span class="lux-number">Q3</span>
+                        <h3>What should I wear to class?</h3>
+                        <div class="lux-icon"></div>
+                    </div>
+                    <div class="lux-content">
+                        <div class="lux-inner">
+                            <p>Wear <strong>comfortable clothes</strong> (leggings, joggers, or athletic wear) and <strong>covered sports shoes</strong>. Don't forget to bring a water bottle!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lux-item">
+                    <div class="lux-header" onclick="toggleLux(this)">
+                        <span class="lux-number">Q4</span>
+                        <h3>Can I switch styles using my package?</h3>
+                        <div class="lux-icon"></div>
+                    </div>
+                    <div class="lux-content">
+                        <div class="lux-inner">
+                            <p>Yes! Our <strong>Flexi Packages</strong> (Credit Packages) allow you to switch between different dance styles so you can explore everything we offer.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lux-item">
+                    <div class="lux-header" onclick="toggleLux(this)">
+                        <span class="lux-number">Q5</span>
+                        <h3>Do you prepare students for competitions?</h3>
+                        <div class="lux-icon"></div>
+                    </div>
+                    <div class="lux-content">
+                        <div class="lux-inner">
+                            <p>Yes! We provide dedicated <strong>Performance Training, Stage Exposure, and Competition Coaching</strong> for students looking to take their dancing to the next level.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lux-item">
+                    <div class="lux-header" onclick="toggleLux(this)">
+                        <span class="lux-number">Q6</span>
+                        <h3>Are trial classes available?</h3>
+                        <div class="lux-icon"></div>
+                    </div>
+                    <div class="lux-content">
+                        <div class="lux-inner">
+                            <p>Yes! <strong>trial classes are available</strong> based on our current schedule. Please contact us to find a slot that fits you!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title-alt">Start Your Journey</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <h3 class="content-heading">Get in Touch</h3>
+                    <p style="margin-bottom: 30px;">Tap a card to copy details instantly.</p>
+                    
+                    <div class="contact-card copy-trigger" data-copy="01118989960">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-detail">
+                            <span>Phone Number</span>
+                            <strong>+60 11-1898 9960</strong>
+                        </div>
+                        <div class="copy-badge">Tap to Copy</div>
+                    </div>
+
+                    <div class="contact-card copy-trigger" data-copy="dancewith.beu@gmail.com">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-detail">
+                            <span>Email Address</span>
+                            <strong>dancewith.beu@gmail.com</strong>
+                        </div>
+                        <div class="copy-badge">Tap to Copy</div>
+                    </div>
+                </div>
+
+                <div class="whatsapp-scan-wrap" data-aos="fade-left">
+                    <h3 class="content-heading" style="text-align: center; font-size: 1.3rem;">Scan to WhatsApp</h3>
+                    <div class="qr-code-box">
+                        <img src="./whatsapp-qr.png" alt="Scan to Chat" class="qr-image">
+                    </div>
+                    <p style="font-size: 0.85rem; color: #666; margin: 10px 0;">Scan with your camera</p>
+                    <a href="https://wa.me/60123456789" target="_blank" class="btn-pill" style="display: inline-block; padding: 10px 25px; font-size: 0.9rem;">Open WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 40px; text-align: center; background: var(--maroon);">
+        <p style="color: white;">&copy; 2026 BeU Dance Academy. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./Beu.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 1200, once: false });
+        });
+    </script>
+</body>
+</html>
