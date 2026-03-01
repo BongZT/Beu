@@ -3,14 +3,46 @@ let isAdultView = true;
 let inactivityTimer;
 const navbar = document.getElementById('navbar');
 
-// --- 2. PACKAGE SLIDER ---
+// --- 2. NAVIGATION AUTO-HIDE & REVEAL LOGIC ---
+const showNav = () => {
+    if (!navbar) return;
+    navbar.classList.remove('nav-hidden');
+    navbar.style.pointerEvents = "auto";
+};
+
+const hideNav = () => {
+    if (!navbar) return;
+    // Only hide if the user isn't at the very top of the page
+    if (window.pageYOffset > 100) {
+        navbar.classList.add('nav-hidden');
+    }
+};
+
+const resetInactivityTimer = () => {
+    showNav(); // Re-show instantly when scrolling starts
+    window.clearTimeout(inactivityTimer);
+    
+    inactivityTimer = setTimeout(() => {
+        hideNav();
+    }, 2000); // 2 seconds of inactivity before hiding
+};
+
+// Global Listeners for Navigation
+window.addEventListener('mousemove', (e) => {
+    if (e.clientY <= 100 || (navbar && navbar.classList.contains('nav-hidden'))) {
+        resetInactivityTimer();
+    }
+});
+window.addEventListener('scroll', resetInactivityTimer);
+
+// --- 3. PACKAGE SLIDER ---
 function changePackage(direction) {
     const adultView = document.getElementById('senior-view');
     const juniorView = document.getElementById('junior-view');
     
     if (!adultView || !juniorView) return;
 
-    isAdultView = !isAdultView; // Flips state
+    isAdultView = !isAdultView; 
 
     if (isAdultView) {
         adultView.classList.add('active');
@@ -21,7 +53,7 @@ function changePackage(direction) {
     }
 }
 
-// --- 3. ACCORDIONS ---
+// --- 4. ACCORDIONS ---
 function toggleLux(header) {
     const item = header.parentElement;
     const content = item.querySelector('.lux-content');
@@ -38,53 +70,8 @@ function toggleLux(header) {
     }
 }
 
-// --- 4. NAVIGATION AUTO-HIDE LOGIC ---
-const showNav = () => {
-    if (!navbar) return;
-    navbar.classList.remove('nav-hidden');
-    navbar.style.pointerEvents = "auto";
-};
-
-const hideNav = () => {
-    if (!navbar) return;
-    // Only hide if the user isn't at the very top of the page
-    if (window.pageYOffset > 100) {
-        navbar.classList.add('nav-hidden');
-    }
-};
-
-const resetInactivityTimer = () => {
-    showNav();
-    window.clearTimeout(inactivityTimer);
-    
-    inactivityTimer = setTimeout(() => {
-        hideNav();
-    }, 2000); // 2 seconds of inactivity before hiding
-};
-
-// Listen for mouse movement and scrolling to keep nav visible
-window.addEventListener('mousemove', (e) => {
-    // Reveal if mouse moves near the top or while nav is hidden
-    if (e.clientY <= 100 || (navbar && navbar.classList.contains('nav-hidden'))) {
-        resetInactivityTimer();
-    }
-});
-window.addEventListener('scroll', resetInactivityTimer);
-
 // --- 5. INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
-    const navbar = document.getElementById('navbar');
-    
-    if (navbar) {
-        // Your scroll and showNav logic goes here
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) {
-                navbar.classList.add('nav-hidden');
-            } else {
-                navbar.classList.remove('nav-hidden');
-            }
-        });
-    }
     // Initial Team Rendering
     renderTeam();
 
@@ -104,23 +91,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }));
     }
 
-    // Copy to Clipboard Logic
+    // --- MOBILE-FRIENDLY COPY LOGIC ---
     document.querySelectorAll('.copy-trigger').forEach(card => {
-        card.addEventListener('click', function() {
-            const text = this.getAttribute('data-copy');
-            navigator.clipboard.writeText(text).then(() => {
-                const badge = this.querySelector('.copy-badge');
-                if (badge) {
-                    badge.innerText = "Copied!";
-                    setTimeout(() => { badge.innerText = "Tap to Copy"; }, 2000);
+        card.addEventListener('click', function(e) {
+            const textToCopy = this.getAttribute('data-copy');
+            const badge = this.querySelector('.copy-badge');
+
+            if (!textToCopy) return;
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    handleCopySuccess(badge);
+                });
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    handleCopySuccess(badge);
+                } catch (err) {
+                    console.error('Fallback copy failed', err);
                 }
-            });
+                document.body.removeChild(textArea);
+            }
         });
     });
 
     // Ensure nav is visible on load
     resetInactivityTimer();
 });
+
+// Helper for Copy UI
+function handleCopySuccess(badge) {
+    if (!badge) return;
+    const originalText = badge.innerText;
+    badge.innerText = "Copied!";
+    badge.style.background = "#28a745"; 
+    
+    setTimeout(() => {
+        badge.innerText = originalText;
+        badge.style.background = ""; 
+    }, 2000);
+}
 
 // --- 6. TEAM DATA & RENDERER ---
 const instructors = [
@@ -137,4 +151,4 @@ function renderTeam() {
             <div class="member-image-wrap"><img src="${p.image}" alt="${p.name}"></div>
             <h3>${p.name}</h3><p>${p.specialty}</p>
         </div>`).join('');
-}   
+}

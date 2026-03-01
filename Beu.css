@@ -108,25 +108,73 @@ nav:hover {
     color: var(--light-pink); 
 }
 
-/* --- 3. GLOBAL SECTION LAYOUT --- */
+/* --- 1. FLEXIBLE GLOBAL LAYOUT --- */
 section {
-    min-height: 90vh; 
-    width: 100%;
-    display: flex; 
+    min-height: 90vh;
+    height: auto !important; /* Forces sections to expand as content stacks */
+    padding: clamp(40px, 8vh, 80px) 5%; /* Fluid padding */
+    display: flex;
     flex-direction: column;
-    justify-content: center; 
     align-items: center;
-    padding: 80px 5%; 
-    position: relative;
 }
 
-.container { 
-    width: 90%; 
-    max-width: 1100px; 
-    margin: 0 auto; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+.container {
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 20px; /* Safety margin for mobile */
+}
+
+/* --- 2. THE OVERLAP PREVENTER (Contact Section) --- */
+.contact-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to new lines */
+    gap: 30px;
+    width: 100%;
+    justify-content: center;
+}
+
+.contact-card {
+    flex: 1 1 350px; /* Grow, shrink, and base width of 350px */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* NEW: Prevents text/button collision */
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid var(--light-pink);
+    border-radius: 12px;
+    background: var(--white);
+    word-break: break-word; /* Prevents long emails from breaking boxes */
+}
+
+/* --- 3. FLEXIBLE INSTRUCTOR GRID --- */
+.team-grid {
+    display: grid;
+    /* Automatically fits as many columns as possible */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 30px;
+    width: 100%;
+}
+
+/* --- 4. RESPONSIVE MOBILE ADJUSTMENTS --- */
+@media (max-width: 850px) {
+    /* Side-by-Side Pricing remains flexible */
+    .package-comparison-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; 
+        gap: 10px !important;
+    }
+
+    /* Navigation Menu Fix */
+    .nav-links {
+        width: 85%; /* Slightly wider for better mobile interaction */
+    }
+
+    .copy-badge {
+        position: relative !important; /* Moves badge below text if it overlaps */
+        right: auto !important;
+        margin-top: 5px;
+    }
 }
 
 /* Section specific backgrounds */
@@ -147,6 +195,27 @@ section {
         grid-template-columns: 1fr; /* Stacks them back on mobile for readability */
         text-align: center;
     }
+}
+
+/* --- HERO SECTION CENTERING --- */
+.hero {
+    height: 100vh;           /* Sets section to full screen height */
+    width: 100%;
+    display: flex;           /* Enables flexbox layout */
+    flex-direction: column;  /* Aligns items vertically */
+    justify-content: center; /* Centers content vertically */
+    align-items: center;     /* Centers content horizontally */
+    text-align: center;      /* Ensures text lines up in the middle */
+    padding-top: 80px;       /* Prevents the navbar from covering the title */
+    background: var(--white); /* Matches your clean design */
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* Centers the button under the title */
+    width: 100%;
+    max-width: 800px;        /* Keeps text from becoming too wide */
 }
 
 /* --- 4. TYPOGRAPHY HIERARCHY --- */
