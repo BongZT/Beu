@@ -469,24 +469,40 @@ p, li, .lux-inner {
 
 .col-head span, .col-body span { font-size: 0.8rem; font-weight: normal; display: block; }
 
-.nav-arrow { 
-    background: none; 
-    border: none; 
-    color: var(--maroon); 
-    font-size: 5rem; 
-    font-weight: 100; 
-    cursor: pointer; 
-    position: absolute; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    transition: 0.3s; 
-    opacity: 0.4; 
-    z-index: 10;
+.nav-arrow {
+    position: absolute;
+    top: 50%;                 /* Positions the top of the arrow at the center */
+    transform: translateY(-50%); /* Perfectly centers the arrow vertically */
+    background: var(--white);
+    color: var(--maroon);
+    border: 2px solid var(--light-pink);
+    border-radius: 50%;       /* Makes them circular for a professional look */
+    width: 50px;              /* Fixed width so it doesn't distort */
+    height: 50px;             /* Fixed height */
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;             /* Keeps arrows above the cards */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.nav-arrow:hover { opacity: 1; transform: translateY(-50%) scale(1.1); }
-.left { left: 20px; }
-.right { right: 20px; }
+/* Position them slightly outside the container for clarity */
+.left { 
+    left: -25px; 
+}
+.right { 
+    right: -25px; 
+}
+
+/* Hover effect for better interaction */
+.nav-arrow:hover {
+    background: var(--maroon);
+    color: var(--white);
+    transform: translateY(-50%) scale(1.1);
+}
 
 .btn-pill { 
     padding: 12px 35px; 

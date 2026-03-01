@@ -7,7 +7,7 @@ const navbar = document.getElementById('navbar');
 const showNav = () => {
     if (!navbar) return;
     navbar.classList.remove('nav-hidden');
-    navbar.style.pointerEvents = "auto";
+    navbar.style.pointerEvents = "auto"; // Re-enable interaction
 };
 
 const hideNav = () => {
@@ -15,16 +15,17 @@ const hideNav = () => {
     // Only hide if the user isn't at the very top of the page
     if (window.pageYOffset > 100) {
         navbar.classList.add('nav-hidden');
+        navbar.style.pointerEvents = "none"; // CRITICAL: Stop blocking the screen
     }
 };
 
 const resetInactivityTimer = () => {
-    showNav(); // Re-show instantly when scrolling starts
+    showNav(); 
     window.clearTimeout(inactivityTimer);
     
     inactivityTimer = setTimeout(() => {
         hideNav();
-    }, 2000); // 2 seconds of inactivity before hiding
+    }, 2000); 
 };
 
 // Global Listeners for Navigation
@@ -33,7 +34,7 @@ window.addEventListener('mousemove', (e) => {
         resetInactivityTimer();
     }
 });
-window.addEventListener('scroll', resetInactivityTimer);
+window.addEventListener('scroll', resetInactivityTimer, { passive: true });
 
 // --- 3. PACKAGE SLIDER ---
 function changePackage(direction) {
@@ -42,14 +43,19 @@ function changePackage(direction) {
     
     if (!adultView || !juniorView) return;
 
+    // Fixed: Properly toggling visibility based on state
     isAdultView = !isAdultView; 
 
     if (isAdultView) {
         adultView.classList.add('active');
         juniorView.classList.remove('active');
+        adultView.style.display = "block";
+        juniorView.style.display = "none";
     } else {
         juniorView.classList.add('active');
         adultView.classList.remove('active');
+        juniorView.style.display = "block";
+        adultView.style.display = "none";
     }
 }
 
@@ -61,7 +67,8 @@ function toggleLux(header) {
 
     document.querySelectorAll('.lux-item').forEach(i => {
         i.classList.remove('active');
-        i.querySelector('.lux-content').style.maxHeight = null;
+        const c = i.querySelector('.lux-content');
+        if(c) c.style.maxHeight = null;
     });
 
     if (!isActive) {
@@ -72,19 +79,28 @@ function toggleLux(header) {
 
 // --- 5. INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Initial Team Rendering
     renderTeam();
 
-    // Mobile Menu Toggle
+    // Mobile Menu Toggle Fix
     const menuBtn = document.getElementById('mobile-menu-btn');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-links li a');
     
     if (menuBtn && navMenu) {
-        menuBtn.addEventListener('click', () => {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Stop click from closing nav instantly
             navMenu.classList.toggle('nav-active');
             menuBtn.classList.toggle('active');
         });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                navMenu.classList.remove('nav-active');
+                menuBtn.classList.remove('active');
+            }
+        });
+
         navLinks.forEach(link => link.addEventListener('click', () => {
             navMenu.classList.remove('nav-active');
             menuBtn.classList.remove('active');
@@ -94,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- MOBILE-FRIENDLY COPY LOGIC ---
     document.querySelectorAll('.copy-trigger').forEach(card => {
         card.addEventListener('click', function(e) {
+            e.preventDefault();
             const textToCopy = this.getAttribute('data-copy');
             const badge = this.querySelector('.copy-badge');
 
@@ -106,24 +123,23 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 const textArea = document.createElement("textarea");
                 textArea.value = textToCopy;
+                textArea.style.position = "fixed"; // Prevent scrolling to bottom
                 document.body.appendChild(textArea);
                 textArea.select();
                 try {
                     document.execCommand('copy');
                     handleCopySuccess(badge);
                 } catch (err) {
-                    console.error('Fallback copy failed', err);
+                    console.error('Copy failed');
                 }
                 document.body.removeChild(textArea);
             }
         });
     });
 
-    // Ensure nav is visible on load
     resetInactivityTimer();
 });
 
-// Helper for Copy UI
 function handleCopySuccess(badge) {
     if (!badge) return;
     const originalText = badge.innerText;
